@@ -147,3 +147,68 @@
 .leaflet-marker-icon {
   transition: transform 0.3s ease-in-out;
 }
+
+/* Theme-specific styles */
+.leaflet-container.theme-light {
+  background: #fff !important;
+}
+
+.leaflet-container.theme-dark {
+  background: #000 !important;
+}
+
+/* Light theme map tiles */
+.map-tiles.theme-light {
+  filter: brightness(1) sepia(0) hue-rotate(0) saturate(1) !important;
+}
+
+/* Dark theme map tiles */
+.map-tiles.theme-dark {
+  filter: brightness(0.6) sepia(0.1) hue-rotate(60deg) saturate(0.3) !important;
+}
+
+/* Theme-specific popup styles */
+.theme-light .leaflet-popup-content-wrapper,
+.theme-light .leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.theme-light .leaflet-popup-content {
+  color: #1f2937 !important;
+}
+
+/* Light theme scrollbar */
+.theme-light ::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.theme-light ::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+}
+
+.theme-light ::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Light theme plane icon */
+.theme-light .plane-icon {
+  filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(40%) contrast(100%);
+}
+
+.theme-light .plane-icon.selected {
+  filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+}
+
+/* Light theme pulse ring */
+.theme-light .pulse-ring {
+  border: 2px solid #4b5563;
+}
+
+/* Light theme flight label */
+.theme-light .flight-label {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+}

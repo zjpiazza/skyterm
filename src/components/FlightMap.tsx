@@ -1,8 +1,7 @@
-import React from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-rotatedmarker';
-import type { FlightData } from '../types';
+import type { Aircraft } from '@prisma/client';
 import 'leaflet/dist/leaflet.css';
 
 // Create plane icons with and without selection effects
@@ -37,36 +36,34 @@ function getAdjustedRotation(track: number | null): number {
 }
 
 interface FlightMapProps {
-  flights: FlightData[];
-  selectedFlight: FlightData | null;
-  onSelectFlight: (flight: FlightData) => void;
+  flights: Aircraft[];
+  selectedFlight: Aircraft | null;
+  onSelectFlight: (flight: Aircraft) => void;
+  theme: 'dark' | 'light';
 }
 
-// Add type declaration for rotationAngle and rotationOrigin
-declare module 'leaflet' {
-  interface Marker {
-    setRotationAngle(angle: number): void;
-    setRotationOrigin(origin: string): void;
-  }
-}
-
-export default function FlightMap({ flights, selectedFlight, onSelectFlight }: FlightMapProps) {
+export default function FlightMap({ flights, selectedFlight, onSelectFlight, theme }: FlightMapProps) {
   const center = flights.length > 0 && flights[0].lat && flights[0].lon
     ? [flights[0].lat, flights[0].lon]
     : [29.9902, -95.3368]; // Default to Houston area
+
+  // Select tile layer based on theme
+  const tileLayerUrl = theme === 'dark'
+    ? "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+    : "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   return (
     <MapContainer
       center={center as [number, number]}
       zoom={9}
-      className="h-[60vh] w-full rounded-lg"
-      style={{ background: '#000' }}
+      className={`h-[60vh] w-full rounded-lg theme-${theme}`}
+      style={{ background: theme === 'dark' ? '#000' : '#fff' }}
       zoomControl={false}
     >
       <TileLayer
-        url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+        url={tileLayerUrl}
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        className="map-tiles"
+        className={`map-tiles theme-${theme}`}
       />
       {flights.map((flight) => {
         if (!flight.lat || !flight.lon) return null;
