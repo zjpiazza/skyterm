@@ -1,0 +1,31 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Aircraft {
+  timestamp BigInt   
+  hex       String   
+  flight    String?  
+  altBaro   Int?     @map("alt_baro")
+  lat       Float?   
+  lon       Float?   
+  speed     Float?   
+  track     Float?   
+  seen      Float?   
+  seenPos   Float?   @map("seen_pos")
+
+  // Define composite primary key
+  @@id([hex, timestamp])
+  
+  // Index for timestamp queries
+  @@index([timestamp])
+  
+  @@map("aircraft")
+}

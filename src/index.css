@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add to your global CSS file */
+.leaflet-marker-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Custom styles for the terminal theme */
+.leaflet-container {
+  background: #000 !important;
+}
+
+/* Make map tiles dark but still show features */
+.map-tiles {
+  filter: brightness(0.6) sepia(0.1) hue-rotate(60deg) saturate(0.3) !important;
+}
+
+/* Hide unnecessary controls */
+.leaflet-control-container .leaflet-top,
+.leaflet-control-container .leaflet-bottom {
+  display: none;
+}
+
+.airplane-icon {
+  transition: transform 1s ease;
+}
+
+.airplane-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.airplane-wrapper.selected {
+  z-index: 1000;
+}
+
+/* Pulsing effect for selected flight */
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #22c55e;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Flight label for selected aircraft */
+.flight-label {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #22c55e;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  white-space: nowrap;
+  border: 1px solid #22c55e40;
+}
+
+.selected-plane {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    filter: brightness(0) saturate(100%) invert(82) sepia(24%) saturate(1191%) hue-rotate(86deg) brightness(150%) contrast(119%) drop-shadow(0 0 16px #22c55e);
+  }
+  to {
+    filter: brightness(0) saturate(100%) invert(82) sepia(24%) saturate(1191%) hue-rotate(86deg) brightness(200%) contrast(119%) drop-shadow(0 0 24px #22c55e);
+  }
+}
+
+/* Remove default Leaflet shadow */
+.leaflet-marker-shadow {
+  display: none;
+}
+
+/* Terminal style popups */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid #22c55e !important;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.2) !important;
+}
+
+.leaflet-popup-content {
+  color: #22c55e !important;
+  margin: 0.5rem 1rem !important;
+}
+
+/* Hide popup close button */
+.leaflet-popup-close-button {
+  display: none !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22c55e40;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22c55e60;
+}
+
+/* Update the plane icon styles */
+.plane-icon {
+  filter: invert(82%) sepia(24%) saturate(1191%) hue-rotate(86deg) brightness(119%) contrast(119%);
+  transition: all 0.3s ease-in-out;
+  width: 24px;
+  height: 24px;
+}
+
+.plane-icon.selected {
+  filter: invert(82%) sepia(24%) saturate(1191%) hue-rotate(86deg) brightness(150%) contrast(119%);
+}
+
+/* Ensure proper rotation behavior */
+.leaflet-marker-icon {
+  transition: transform 0.3s ease-in-out;
+}
