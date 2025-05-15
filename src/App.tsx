@@ -126,7 +126,7 @@ function App() {
         <header className={`border-b ${theme === 'dark' ? 'border-green-500/20' : 'border-gray-200'} pb-4 flex justify-between items-center`}>
           <div>
             <h1 className={`text-3xl font-mono font-bold ${theme === 'dark' ? 'text-green-500' : 'text-gray-800'}`}>
-              FlightAware Terminal
+              Skyterm
             </h1>
             <p className={`font-mono mt-2 ${theme === 'dark' ? 'text-green-600' : 'text-gray-600'}`}>
               Tracking {flights.length} aircraft
